@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import GoalInput from './components/goals/GoalInput';
 import CourseGoals from './components/goals/CourseGoals';
@@ -14,7 +14,7 @@ function App() {
       setIsLoading(true);
 
       try {
-        const response = await fetch('http://localhost/goals');
+        const response = await fetch('http://host.docker.internal/goals');
 
         const resData = await response.json();
 
@@ -25,7 +25,7 @@ function App() {
         setLoadedGoals(resData.goals);
       } catch (err) {
         setError(
-          err.message ||
+            err.message ||
             'Fetching goals failed - the server responsed with an error.'
         );
       }
@@ -39,7 +39,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/goals', {
+      const response = await fetch('http://host.docker.internal/goals', {
         method: 'POST',
         body: JSON.stringify({
           text: goalText,
@@ -67,7 +67,7 @@ function App() {
       });
     } catch (err) {
       setError(
-        err.message ||
+          err.message ||
           'Adding a goal failed - the server responsed with an error.'
       );
     }
@@ -78,9 +78,10 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/goals/' + goalId, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+          'http://host.docker.internal/goals/' + goalId, {
+            method: 'DELETE',
+          });
 
       const resData = await response.json();
 
@@ -94,7 +95,7 @@ function App() {
       });
     } catch (err) {
       setError(
-        err.message ||
+          err.message ||
           'Deleting the goal failed - the server responsed with an error.'
       );
     }
@@ -102,13 +103,13 @@ function App() {
   }
 
   return (
-    <div>
-      {error && <ErrorAlert errorText={error} />}
-      <GoalInput onAddGoal={addGoalHandler} />
-      {!isLoading && (
-        <CourseGoals goals={loadedGoals} onDeleteGoal={deleteGoalHandler} />
-      )}
-    </div>
+      <div>
+        {error && <ErrorAlert errorText={error}/>}
+        <GoalInput onAddGoal={addGoalHandler}/>
+        {!isLoading && (
+            <CourseGoals goals={loadedGoals} onDeleteGoal={deleteGoalHandler}/>
+        )}
+      </div>
   );
 }
 
