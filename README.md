@@ -19,3 +19,8 @@ docker build -t goals-front-image .
 **Execution du container front avec mapping du port**
 Car accessible depuis un browser donc pas besoin du network ici :
 docker run --rm -p 3000:3000 --name goals-front goals-front-image
+
+Working whith persistant data in mango db with a named volume and add authentication credentials
+with environment variables :
+
+docker run --rm -p 80:80 --name goals-backend --network goals-net goals-backend
