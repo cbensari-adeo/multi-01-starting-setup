@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import './GoalInput.css';
 import Card from '../UI/Card';
@@ -24,20 +24,20 @@ function GoalInput(props) {
   }
 
   return (
-    <section id='goal-input'>
-      <Card>
-        <form onSubmit={goalSubmitHandler}>
-          <label htmlFor='text'>New Goal</label>
-          <input
-            type='text'
-            id='text'
-            value={enteredGoalText}
-            onChange={updateGoalTextHandler}
-          />
-          <button>Add Goal</button>
-        </form>
-      </Card>
-    </section>
+      <section id='goal-input'>
+        <Card>
+          <form onSubmit={goalSubmitHandler}>
+            <label htmlFor='text'>New Goal</label>
+            <input
+                type='text'
+                id='text'
+                value={enteredGoalText}
+                onChange={updateGoalTextHandler}
+            />
+            <button>Add Goal</button>
+          </form>
+        </Card>
+      </section>
   );
 }
 

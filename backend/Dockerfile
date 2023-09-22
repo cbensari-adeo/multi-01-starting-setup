@@ -8,10 +8,9 @@ RUN npm install
 
 COPY . .
 
-#ARG DEFAULT_PORT=80
-#
-#ENV PORT $DEFAULT_PORT
+ENV MONGODB_USERNAME=****
+ENV MONGODB_PASSWORD=****
 
 EXPOSE 80
 
-CMD [ "node", "app.js"]
+CMD [ "npm", "start"]
