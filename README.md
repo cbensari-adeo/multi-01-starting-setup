@@ -83,3 +83,20 @@ docker run --rm -p 3000:3000 \
     -v /app/node_modules \
     goals-front
 ```
+
+# Utilisation de Docker Compose :
+
+```
+// Démarrer tous les containers, avec forcing du build d'image et en détaché :
+docker-compose up --build -d
+
+// arréter les containers et les supprimers à leur arrêt :
+docker-compose down
+
+// Build d'image :
+docker-compose build nom_service
+
+// Execution de containers :
+docker-compose run nom_service --rm -d -v ......
+
+```

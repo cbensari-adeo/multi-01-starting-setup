@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  goals-db:
+    container_name: goals-db
+    image: mongo
+    env_file:
+      - ./env/mongodb.env
+    networks:
+      - 'goals-net'
+    volumes:
+      - 'goals-data:/data/db'
+    #    environment:
+    #      MONGO_INITDB_ROOT_USERNAME: user
+    #      MONGO_INITDB_ROOT_PASSWORD: password
+
+  goals-backend:
+    container_name: goals-backend
+    build:
+      context: './backend'
+      dockerfile: Dockerfile # can be omitted if it's the default name
+    env_file:
+      - ./env/backend.env
+    networks:
+      - 'goals-net'
+    volumes:
+      - './backend:/app'
+      - 'logs-data:/app/logs'
+      - '/app/node_modules'
+    ports:
+      - '80:80'
+    depends_on:
+      - goals-db
+  goals-front:
+    build:
+      context: './frontend'
+    networks:
+      - 'goals-net'
+    volumes:
+      - './frontend/src:/app/src'
+      - '/app/node_modules'
+    ports:
+      - '3000:3000'
+    # those flags are equivalent to -it in docker run command
+    stdin_open: true
+    tty: true
+    depends_on:
+      - goals-backend
+volumes:
+  goals-data:
+  logs-data:
+
+networks:
+  goals-net:
